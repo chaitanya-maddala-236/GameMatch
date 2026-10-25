@@ -1,0 +1,240 @@
+{
+  "experiment": "gamematch-v1",
+  "seed": 2026,
+  "configuration": {
+    "positive_definition": "playtime_forever > 0 minutes, except an explicit recommend=False review for the same pair",
+    "split_strategy": "deterministic per-user random holdout; no source timestamps in user-items snapshot",
+    "min_train_support": 5,
+    "max_candidate_games": 6000,
+    "neighbors_per_item": 100,
+    "evaluation_user_cap": 5000,
+    "k_values": [
+      5,
+      10,
+      20
+    ],
+    "hybrid_weight_selection": "validation NDCG@10",
+    "selected_hybrid_weights": {
+      "collaborative": 0.7,
+      "content": 0.2,
+      "popularity": 0.1
+    }
+  },
+  "environment": {
+    "python": "3.13.1",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3"
+  },
+  "runtime_and_memory": {
+    "model_version": "gamematch-v1",
+    "built_at_utc": "2026-10-25T19:46:33.625844+00:00",
+    "dataset": "UCSD/McAuley Australian Steam sample, processed from downloaded source files",
+    "n_users": 68401,
+    "user_matrix_rows": 87625,
+    "n_games": 33918,
+    "n_train_interactions": 3097075,
+    "n_validation_users": 1997,
+    "n_test_users": 4987,
+    "candidate_games": 6000,
+    "min_training_support": 5,
+    "training_seconds_including_evaluation": 570.004,
+    "process_rss_before_bytes": 146173952,
+    "process_rss_after_bytes": 240775168,
+    "process_peak_rss_bytes": 1481527296,
+    "limitations": [
+      "Historical Australian sample; it is not representative of current Steam users.",
+      "The user-items snapshot has no reliable interaction timestamps; evaluation uses random per-user holdouts.",
+      "Zero-playtime ownership and unobserved games are not treated as dislikes.",
+      "Offline ranking metrics are not evidence of satisfaction, engagement, purchases, or retention.",
+      "The dataset page requests citation but does not state a formal reuse license; raw and per-user data are excluded from Git."
+    ],
+    "data_quality_counts": {
+      "user_records": 88310,
+      "library_rows": 5153209,
+      "games_without_metadata": 1786,
+      "positive_interactions": 3280258,
+      "zero_playtime_ownerships": 1867963,
+      "explicit_negative_reviews_excluded": 4988,
+      "duplicate_pairs_after_normalization": 38818,
+      "unique_user_game_pairs": 3241440,
+      "users": 68401,
+      "games": 10046,
+      "catalog_games": 33918,
+      "training_interactions": 3114898,
+      "validation_targets": 63230,
+      "test_targets": 65409,
+      "validation_users": 63230,
+      "test_users": 65409,
+      "candidate_games": 7582,
+      "catalog_games_with_genre_or_tags": 31994,
+      "metadata_missing_fields": {
+        "title": 0,
+        "genre_and_tags": 1924
+      }
+    }
+  },
+  "metrics": {
+    "validation": {
+      "tuning_users": 1997,
+      "weight_grid": [
+        {
+          "weights": {
+            "collaborative": 0.7,
+            "content": 0.2,
+            "popularity": 0.1
+          },
+          "validation_ndcg@10": 0.14797102011922963
+        },
+        {
+          "weights": {
+            "collaborative": 0.5,
+            "content": 0.4,
+            "popularity": 0.1
+          },
+          "validation_ndcg@10": 0.13548560589698452
+        },
+        {
+          "weights": {
+            "collaborative": 0.35,
+            "content": 0.5,
+            "popularity": 0.15
+          },
+          "validation_ndcg@10": 0.11150114181989901
+        },
+        {
+          "weights": {
+            "collaborative": 0.45,
+            "content": 0.3,
+            "popularity": 0.25
+          },
+          "validation_ndcg@10": 0.14060670504275183
+        },
+        {
+          "weights": {
+            "collaborative": 0.3,
+            "content": 0.3,
+            "popularity": 0.4
+          },
+          "validation_ndcg@10": 0.1346116445322072
+        },
+        {
+          "weights": {
+            "collaborative": 0.25,
+            "content": 0.55,
+            "popularity": 0.2
+          },
+          "validation_ndcg@10": 0.09219885148672631
+        },
+        {
+          "weights": {
+            "collaborative": 0.2,
+            "content": 0.2,
+            "popularity": 0.6
+          },
+          "validation_ndcg@10": 0.135272092661874
+        }
+      ],
+      "selected_weights": {
+        "collaborative": 0.7,
+        "content": 0.2,
+        "popularity": 0.1
+      }
+    },
+    "test": {
+      "popularity": {
+        "n_users": 4987,
+        "catalog_coverage_at_10": 0.01,
+        "precision@5": 0.026549027471425714,
+        "recall@5": 0.13274513735712853,
+        "ndcg@5": 0.09402971500647452,
+        "map@5": 0.08120780696477507,
+        "precision@10": 0.018407860437136558,
+        "recall@10": 0.18407860437136556,
+        "ndcg@10": 0.110621360248206,
+        "map@10": 0.08804852935091556,
+        "precision@20": 0.012342089432524564,
+        "recall@20": 0.24684178865049128,
+        "ndcg@20": 0.1264137798697476,
+        "map@20": 0.09234349997686064,
+        "intra_list_diversity@10": 0.9392137803460836,
+        "novelty_bits@10": 7.271041664649246,
+        "top_decile_popularity_share@10": 1.0
+      },
+      "content": {
+        "n_users": 4987,
+        "catalog_coverage_at_10": 0.2771666666666667,
+        "precision@5": 0.0035692801283336677,
+        "recall@5": 0.01784640064166834,
+        "ndcg@5": 0.01159258313798307,
+        "map@5": 0.009558184613327986,
+        "precision@10": 0.0032885502305995584,
+        "recall@10": 0.03288550230599559,
+        "ndcg@10": 0.016350706458095384,
+        "map@10": 0.011459795468217364,
+        "precision@20": 0.002997794265089232,
+        "recall@20": 0.05995588530178464,
+        "ndcg@20": 0.02319047876047594,
+        "map@20": 0.013335555775652347,
+        "intra_list_diversity@10": 0.6998214664710128,
+        "novelty_bits@10": 12.665771293454267,
+        "top_decile_popularity_share@10": 0.3320633647483457
+      },
+      "collaborative": {
+        "n_users": 4987,
+        "catalog_coverage_at_10": 0.08583333333333333,
+        "precision@5": 0.03276518949268097,
+        "recall@5": 0.16382594746340484,
+        "ndcg@5": 0.11768704762180256,
+        "map@5": 0.10245638660517345,
+        "precision@10": 0.022077401243232403,
+        "recall@10": 0.22077401243232403,
+        "ndcg@10": 0.13600246898466328,
+        "map@10": 0.10995827246077897,
+        "precision@20": 0.01471826749548827,
+        "recall@20": 0.2943653499097654,
+        "ndcg@20": 0.15454626770778493,
+        "map@20": 0.11501637181986588,
+        "intra_list_diversity@10": 0.9540374049266187,
+        "novelty_bits@10": 7.559284324166455,
+        "top_decile_popularity_share@10": 0.9916783637457389
+      },
+      "hybrid": {
+        "n_users": 4987,
+        "catalog_coverage_at_10": 0.08366666666666667,
+        "precision@5": 0.03396831762582716,
+        "recall@5": 0.16984158812913575,
+        "ndcg@5": 0.12062779646038142,
+        "map@5": 0.10445157409264084,
+        "precision@10": 0.022678965309805493,
+        "recall@10": 0.22678965309805493,
+        "ndcg@10": 0.138890936955881,
+        "map@10": 0.11189839614744365,
+        "precision@20": 0.015169440545418088,
+        "recall@20": 0.30338881090836173,
+        "ndcg@20": 0.15816367996601569,
+        "map@20": 0.11713780453557278,
+        "intra_list_diversity@10": 0.9382852141900784,
+        "novelty_bits@10": 7.583364551453711,
+        "top_decile_popularity_share@10": 0.9922197714056546,
+        "ndcg@10_user_bootstrap_95ci": {
+          "lower_95": 0.13097013868391513,
+          "upper_95": 0.14688015766441823
+        },
+        "history_groups": {
+          "1-5 games": {
+            "users": 777,
+            "ndcg@10": 0.15978676121836116
+          },
+          "6-20 games": {
+            "users": 1181,
+            "ndcg@10": 0.17872447726368965
+          },
+          "21+ games": {
+            "users": 3029,
+            "ndcg@10": 0.11799972977348784
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "measured_at_utc": "2026-10-25T20:03:41.102138+00:00",
+  "target": "http://127.0.0.1:8001",
+  "method": "POST /v1/recommendations with three returned catalog game IDs",
+  "requested": 100,
+  "completed_responses": 100,
+  "concurrency": 5,
+  "wall_seconds": 1.753,
+  "throughput_requests_per_second": 57.033,
+  "latency_ms_p50": 82.723,
+  "latency_ms_p95": 128.52,
+  "latency_ms_mean": 84.14,
+  "status_counts": {
+    "200": 100
+  },
+  "errors": [],
+  "client_process_rss_mib_after": 40.16,
+  "interpretation": "One local run measures only this host, request mix, model artifact, and concurrency. It is not a production capacity guarantee."
+}

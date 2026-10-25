@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: gamematch-api
+    runtime: docker
+    plan: 1c-2g
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerCommand: >-
+      /bin/sh -c 'exec uvicorn gamematch.api:app --host 0.0.0.0 --port "${PORT:-10000}" --timeout-keep-alive 5 --workers 1'
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    disk:
+      name: gamematch-data
+      mountPath: /var/data
+      sizeGB: 5
+    envVars:
+      - key: GAMEMATCH_DATA_DIR
+        value: /var/data
+      - key: GAMEMATCH_MODEL_PATH
+        value: /var/data/artifacts/models/gamematch-v1/model.joblib
+      - key: DATABASE_URL
+        sync: false
+      - key: PLAYER_ID_HASH_SECRET
+        generateValue: true
+      - key: GAMEMATCH_CORS_ORIGINS
+        value: "*"
+
+  - type: web
+    name: gamematch-dashboard
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerCommand: >-
+      /bin/sh -c 'exec streamlit run dashboard/app.py --server.address 0.0.0.0 --server.port "${PORT:-10000}" --server.headless true'
+    autoDeployTrigger: commit
+    envVars:
+      - key: API_BASE_URL
+        value: http://gamematch-api:10000

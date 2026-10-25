@@ -1,0 +1,15 @@
+.git
+.venv
+.env
+.env.*
+__pycache__
+.pytest_cache
+.ruff_cache
+data/raw
+data/processed
+artifacts/models
+artifacts/experiments
+reports
+model_evaluation_report.md
+*.sqlite3
+*.db

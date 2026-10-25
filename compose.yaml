@@ -1,0 +1,58 @@
+services:
+  postgres:
+    image: postgres:18.0-alpine3.22
+    environment:
+      POSTGRES_DB: gamematch
+      POSTGRES_USER: gamematch
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-gamematch-local-only}
+    volumes:
+      - gamematch_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gamematch -d gamematch"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    environment:
+      GAMEMATCH_DATA_DIR: /var/data
+      GAMEMATCH_MODEL_PATH: /var/data/artifacts/models/gamematch-v1/model.joblib
+      DATABASE_URL: postgresql+psycopg://gamematch:${POSTGRES_PASSWORD:-gamematch-local-only}@postgres:5432/gamematch
+      PLAYER_ID_HASH_SECRET: ${PLAYER_ID_HASH_SECRET:-local-development-only-change-me}
+      GAMEMATCH_CORS_ORIGINS: http://localhost:8501
+      PORT: 8000
+    volumes:
+      - type: bind
+        source: ${GAMEMATCH_HOST_DATA:-./data}
+        target: /var/data
+    ports:
+      - "${GAMEMATCH_API_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 4
+      start_period: 1800s
+
+  dashboard:
+    build: .
+    command: ["streamlit", "run", "dashboard/app.py", "--server.address", "0.0.0.0", "--server.port", "8501", "--server.headless", "true"]
+    environment:
+      API_BASE_URL: http://api:8000
+    ports:
+      - "${GAMEMATCH_DASHBOARD_PORT:-8501}:8501"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 4
+
+volumes:
+  gamematch_postgres:
