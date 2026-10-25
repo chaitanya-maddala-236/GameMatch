@@ -149,7 +149,7 @@ The reproducible pipeline downloads three files from the official [UCSD/McAuley 
 
 There is **no public deployment URL yet**. Cloud provisioning is on hold. The repository includes a Render Blueprint and a [Render + Neon deployment runbook](docs/deployment.md); no Render or Neon resources have been created. See [deployment status](docs/deployment-status.md).
 
-GitHub Actions runs Ruff, unit/API tests, Python compilation, and a Docker image build. The [private GitHub repository](https://github.com/chaitanya-maddala-236/GameMatch) is the source of truth.
+GitHub Actions runs Ruff, unit/API tests, Python compilation, and a Docker image build. The [GameMatch GitHub repository](https://github.com/chaitanya-maddala-236/GameMatch) is the source of truth.
 
 ## Further reading
 
