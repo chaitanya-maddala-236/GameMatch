@@ -9,7 +9,7 @@
 - [x] Run ranked evaluation and save actual metrics, configuration, and visualizations.
 - [x] Implement FastAPI catalog/recommendation/similarity/feedback/monitoring endpoints and persistence.
 - [x] Implement Streamlit discovery, recommendations, similarity, evaluation, and monitoring views.
-- [x] Add tests for data, ranking metrics, exclusions, fallbacks, persistence, and API contracts; run and fix them (13 passed).
+- [x] Add tests for data, ranking metrics, exclusions, fallbacks, persistence, and API contracts; run and fix them (14 passed).
 - [x] Add Docker Compose, health checks, GitHub Actions, and a Render + Neon deploy Blueprint/runbook.
 - [x] Run API and dashboard smoke checks, a 100-request latency benchmark, and Docker verification.
-- [ ] Publish the completed source to the private GitHub repo and document cloud deployment as pending spend and secret-transfer approval.
+- [x] Publish the completed source to the private GitHub repo and document cloud provisioning as on hold at the user's direction.

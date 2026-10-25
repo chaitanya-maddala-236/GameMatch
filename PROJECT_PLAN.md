@@ -28,5 +28,5 @@ The user-items snapshot has no event timestamps. Use deterministic per-user rand
 2. Implement reproducible acquisition, schema checks, processing, split, models, and evaluation report. *(Complete; reports and model artifacts generated locally.)*
 3. Implement recommendation API, persistence, metrics, feedback, and safe inputs. *(Complete; local Compose smoke checked.)*
 4. Implement API-backed discovery/evaluation/monitoring dashboard. *(Complete; opened against local API.)*
-5. Add tests, Docker, CI, Render Blueprint, and deployment runbook; verify local app. *(Complete; 13 tests pass and images build.)*
-6. Publish to private GitHub and deploy if authorized. *(GitHub push pending this turn; cloud provisioning held at user's direction.)*
+5. Add tests, Docker, CI, Render Blueprint, and deployment runbook; verify local app. *(Complete; 14 tests pass and images build.)*
+6. Publish to private GitHub and deploy if authorized. *(Source pushed to `main`; cloud provisioning held at user's direction.)*

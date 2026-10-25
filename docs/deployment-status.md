@@ -1,6 +1,6 @@
 # Deployment status
 
-**Status as of 2026-10-26:** implementation and local evaluation are complete. The repository has been prepared for a private GitHub push. The user asked to hold cloud provisioning, so Render and Neon resources remain uncreated and there is no public URL.
+**Status as of 2026-10-26:** implementation and local evaluation are complete. The source is pushed to the private [GameMatch GitHub repository](https://github.com/chaitanya-maddala-236/GameMatch), branch `main`, at commit `7f47b1e`. The user asked to hold cloud provisioning, so Render and Neon resources remain uncreated and there is no public URL.
 
 ## Verified locally
 
